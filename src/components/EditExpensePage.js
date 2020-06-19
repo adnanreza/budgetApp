@@ -1,16 +1,31 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import ExpenseForm from './ExpenseForm';
+import { editExpense } from '../actions/expenses';
 
 const EditExpensePage = (props) => {
-  console.log(props);
   return (
     <Fragment>
-      <div>This is from my edit expense component</div>
-      <p>
-        Go to <Link to='/edit/1'>1</Link>
-      </p>
+      <ExpenseForm
+        expense={props.expense}
+        subProp={(exp) => {
+          // dispatch the action to edit the expense
+          // redirect to the dashboard
+          console.log('updated', exp);
+          props.dispatch(editExpense(props.match.params.id, exp));
+          props.history.push('/');
+        }}
+      />
     </Fragment>
   );
 };
 
-export default EditExpensePage;
+const mapStateToProps = (state, props) => {
+  return {
+    expense: state.expenses.find(
+      (expense) => expense.id === props.match.params.id
+    ),
+  };
+};
+
+export default connect(mapStateToProps)(EditExpensePage);
