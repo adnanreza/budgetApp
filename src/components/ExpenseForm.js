@@ -49,7 +49,13 @@ export default class ExpenseForm extends Component {
       this.setState(() => ({
         error: '',
       }));
-      console.log('Submitted');
+      //console.log('Submitted');
+      this.props.subProp({
+        description: this.state.description,
+        amount: parseFloat(this.state.amount, 10) * 100,
+        createdAt: this.state.createdAt.valueOf(),
+        note: this.state.note,
+      });
     }
   };
 
