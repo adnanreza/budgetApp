@@ -23,6 +23,23 @@ test('should generate set end date action object', () => {
   });
 });
 
+test('should generate setText filter action object with given values', () => {
+  const filterText = 'phone bill';
+  const action = setTextFilter(filterText);
+  expect(action).toEqual({
+    type: 'SET_TEXT_FILTER',
+    text: filterText,
+  });
+});
+
+test('should generate setText filter action object with default values', () => {
+  const action = setTextFilter();
+  expect(action).toEqual({
+    type: 'SET_TEXT_FILTER',
+    text: '',
+  });
+});
+
 test('should generate sort by date action object', () => {
   const action = sortByDate();
   expect(action).toEqual({
@@ -36,7 +53,3 @@ test('should generate sort by amount action object', () => {
     type: 'SORT_BY_AMOUNT',
   });
 });
-
-test('', () => {});
-
-test('', () => {});
