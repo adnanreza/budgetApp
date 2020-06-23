@@ -24,3 +24,34 @@ test('should setup edit expense action object', () => {
     },
   });
 });
+
+test('should setup add expense action object with provided values', () => {
+  const expenseData = {
+    description: 'Monthly phone bill',
+    notes: 'Fido',
+    amount: 45.5,
+    createdAt: 500,
+  };
+  const action = addExpense(expenseData);
+  expect(action).toEqual({
+    type: 'ADD_EXPENSE',
+    expense: {
+      ...expenseData,
+      id: expect.any(String),
+    },
+  });
+});
+
+test('should setup add expense action object with default values', () => {
+  const action = addExpense();
+  expect(action).toEqual({
+    type: 'ADD_EXPENSE',
+    expense: {
+      id: expect.any(String),
+      description: '',
+      notes: '',
+      amount: 0,
+      createdAt: 0,
+    },
+  });
+});
