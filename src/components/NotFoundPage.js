@@ -7,4 +7,4 @@ const NotFoundPage = () => (
   </div>
 );
 
-export default NotFound;
+export default NotFoundPage;
