@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import moment from 'moment';
 import ExpenseForm from '../../components/ExpenseForm';
 import toJSON from 'enzyme-to-json';
 import expenses from '../fixtures/expenses';
@@ -75,4 +76,11 @@ test('should call onSubmit prop for valid form submission', () => {
     createdAt: expenses[0].createdAt,
     note: expenses[0].note,
   });
+});
+
+test('should set new date on date change', () => {
+  const wrapper = shallow(<ExpenseForm />);
+  const now = moment();
+  wrapper.find('SingleDatePicker').prop('onDateChange')(now);
+  expect(wrapper.state('createdAt')).toEqual(now);
 });
