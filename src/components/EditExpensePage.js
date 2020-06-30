@@ -4,6 +4,16 @@ import ExpenseForm from './ExpenseForm';
 import { editExpense, removeExpense } from '../actions/expenses';
 
 export class EditExpensePage extends React.Component {
+  onSubmit = (exp) => {
+    this.props.editExpense(this.props.match.params.id, exp);
+    this.props.history.push('/');
+  };
+
+  onRemove = () => {
+    this.props.removeExpense({ id: this.props.match.params.id });
+    this.props.history.push('/');
+  };
+
   render() {
     return (
       <Fragment>
@@ -12,16 +22,6 @@ export class EditExpensePage extends React.Component {
       </Fragment>
     );
   }
-
-  onSubmit = (exp) => {
-    this.props.editExpense(this.props.match.params.id, exp);
-    this.props.history.push('/');
-  };
-
-  onRemove = (e) => {
-    this.props.removeExpense({ id: this.props.match.params.id });
-    this.props.history.push('/');
-  };
 }
 
 const mapStateToProps = (state, props) => ({
